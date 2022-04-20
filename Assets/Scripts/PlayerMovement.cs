@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D myRB;
     [SerializeField] float moveSpeed;
+    float movement;
+
+    [SerializeField] Camera c;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +17,25 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        Debug.Log(movement.ToString());
+        movementArrows();
+    }
+
+    private void movementArrows()
+    {
+        movement = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+        if (movement == 0)
+        {
+            return;
+        }
+        else if (movement > 0)
         {
             myRB.MovePosition(new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y));
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (movement < 0)
         {
-                myRB.MovePosition(new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y));
+            myRB.MovePosition(new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y));
         }
     }
+
 }
