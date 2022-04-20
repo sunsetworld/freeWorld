@@ -43,4 +43,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public float GetTransformX()
+    {
+        float transformX = transform.position.x;
+        return transformX;
+    }
+
 }
