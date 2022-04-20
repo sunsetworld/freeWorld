@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
         movementArrows();
     }
 
+    private void LateUpdate()
+    {
+        
+    }
+
     private void movementArrows()
     {
         movement = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
