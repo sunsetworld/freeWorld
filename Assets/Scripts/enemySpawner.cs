@@ -5,11 +5,11 @@ using UnityEngine;
 public class enemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject e;
+    bool spawnEnemy = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -23,13 +23,14 @@ public class enemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (e != null)
+        if (spawnEnemy)
         {
-            float spawnX = Random.Range(35.76f, 85.29f);
+            float spawnX = Random.Range(38, 84);
             float SpawnY = 1.454f;
             Vector2 spawnPos = new Vector2(spawnX, SpawnY);
             Instantiate(e, spawnPos, Quaternion.identity);
         }
+
 
     }
 }

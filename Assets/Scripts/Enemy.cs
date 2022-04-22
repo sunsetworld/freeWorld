@@ -5,31 +5,41 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] SpriteRenderer sP;
-
     [SerializeField] Sprite fallingEnemy;
-
     [SerializeField] Sprite standingEnemy;
 
-    private Transform player;
     bool landed;
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] float speed;
-    float spawnX;
+    public float spawnX;
+
+    public PlayerMovement pM;
+    private GameObject player;
+
+    float movementX = 1;
     // Start is called before the first frame update
     void Start()
     {
         landed = false;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         sP.sprite = fallingEnemy;
+
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveTowardsPlayer();
+        if (landed)
+        {
+            StartCoroutine(moveEnemy());
+        }
     }
 
-
+    IEnumerator moveEnemy()
+    {
+        yield return new WaitForSeconds(3);
+       // transform.Translate(transform.position.x, movementX, transform.position.z);
+    }
 
 
 
@@ -63,14 +73,4 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void MoveTowardsPlayer()
-    {
-        if (landed)
-        {
-            if (player != null)
-            {
-                rb2d.MovePosition(Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime));
-            }
-        }
-    }
 }
